@@ -146,7 +146,9 @@ package flashsocket.client.base
 		{
 			_route = parent ? parent.route.concat([id]) : [id];
 			
-			for (var i:int = 0; i < units.length;i ++)
+			var len:int = units.length
+			
+			for (var i:int = 0; i < len;i ++)
 				units[i].updateRoute();
 		}
 		
@@ -154,7 +156,9 @@ package flashsocket.client.base
 		{
 			depth = parent ? parent.depth + 1 : 0;
 			
-			for (var i:int = 0; i < units.length;i ++)
+			var len:int = units.length
+			
+			for (var i:int = 0; i < len;i ++)
 				units[i].updateRoute();
 		}
 		
@@ -183,8 +187,12 @@ package flashsocket.client.base
 			var remoteRoutingMap:Object = getRemoteRoutingMap();
 			
 			if (remoteRoutingMap)
-				for (var i:int = 0; i < units.length;i ++)
+			{
+				var len:int = units.length
+				
+				for (var i:int = 0; i < len;i ++)
 					units[i].$identifyChildren(remoteRoutingMap);
+			}
 		}
 		
 		public function $identify(remoteRoutingMap:Object):void
@@ -199,12 +207,12 @@ package flashsocket.client.base
 			
 			if (remoteRoutingMap)
 			{
-				var i:int;
-				
 				if (receiverNamespace && remoteRoutingMap.hasOwnProperty(receiverNamespace))
 					receiverRoute = remoteRoutingMap[receiverNamespace];
 				
-				for (i = 0; i < units.length;i ++)
+				var len:int = units.length
+				
+				for (var i:int = 0; i < len;i ++)
 					units[i].$identifyChildren(remoteRoutingMap);
 			}
 		}
@@ -245,8 +253,12 @@ package flashsocket.client.base
 			var localRoutingMap:Object = getLocalRoutingMap();
 			
 			if (localRoutingMap)
-				for (var i:int = 0; i < units.length;i ++)
+			{
+				var len:int = units.length
+				
+				for (var i:int = 0; i < len;i ++)
 					units[i].$registerChildren(localRoutingMap);
+			}
 		}
 		
 		public function $registerChildren(localRoutingMap:Object):void
@@ -261,7 +273,9 @@ package flashsocket.client.base
 						localRoutingMap[namespace] = route;
 				}
 				
-				for (var i:int = 0; i < units.length;i ++)
+				var len:int = units.length
+				
+				for (var i:int = 0; i < len;i ++)
 					units[i].$registerChildren(localRoutingMap);
 			}
 		}
@@ -288,8 +302,12 @@ package flashsocket.client.base
 			var localRoutingMap:Object = getLocalRoutingMap();
 			
 			if (localRoutingMap)
-				for (var i:int = 0; i < units.length;i ++)
+			{
+				var len:int = units.length
+				
+				for (var i:int = 0; i < len;i ++)
 					units[i].$unregisterChildren(localRoutingMap);
+			}
 		}
 		
 		public function $unregisterChildren(localRoutingMap:Object):void
@@ -299,7 +317,9 @@ package flashsocket.client.base
 				if (namespace && localRoutingMap[namespace])
 					delete localRoutingMap[namespace];
 				
-				for (var i:int = 0; i < units.length;i ++)
+				var len:int = units.length
+				
+				for (var i:int = 0; i < len;i ++)
 					units[i].$unregisterChildren(localRoutingMap);
 			}
 		}
@@ -316,13 +336,17 @@ package flashsocket.client.base
 		
 		public function connected():void
 		{
-			for (var i:int = 0; i < units.length;i ++)
+			var len:int = units.length
+			
+			for (var i:int = 0; i < len;i ++)
 				units[i].connected();
 		}
 		
 		public function disconnected():void
 		{
-			for (var i:int = 0; i < units.length;i ++)
+			var len:int = units.length
+			
+			for (var i:int = 0; i < len;i ++)
 				units[i].disconnected();
 		}
 		
