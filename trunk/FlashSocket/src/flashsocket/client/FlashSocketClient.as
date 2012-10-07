@@ -28,6 +28,9 @@ package flashsocket.client
 		
 		private var tmpBuffer:ByteArray = new ByteArray()
 		
+		public var messageFn:Function;
+		
+		public var dispatchMessage:Boolean = true;
 		public var processMessage:Boolean = true;
 		
 		public function FlashSocketClient(address:String = null, port:int = 0)
@@ -118,7 +121,14 @@ package flashsocket.client
 		protected function processData(data:ByteArray):void
 		{
 			//trace("-processData-", data.length);
-			dispatchEvent(new FlashSocketClientEvent(FlashSocketClientEvent.MESSAGE, new FlashSocketMessage(data)));
+			
+			var mesage:FlashSocketMessage = new FlashSocketMessage(data);
+			
+			if (messageFn != null)
+				messageFn(mesage);
+			
+			if (dispatchMessage)
+				dispatchEvent(new FlashSocketClientEvent(FlashSocketClientEvent.MESSAGE, mesage));
 		}
 		
 		private function getMessageLength():int
